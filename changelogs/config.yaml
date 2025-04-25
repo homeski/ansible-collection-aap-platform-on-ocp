@@ -29,5 +29,5 @@ sections:
     - Known Issues
   - - doc_changes
     - Documentation Changes
-title: "Escwq Kubemanifests Collection"
+title: "escwq.kubernetes collection"
 trivial_section_name: trivial

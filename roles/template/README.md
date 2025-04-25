@@ -1,38 +1,41 @@
 Role Name
 =========
 
-A brief description of the role goes here.
+A role to template the Kubernetes manifest files needed for an AAP Operator installation.
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+You must pass in the role variables defined below as needed.
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+| Variable Name | Default Value | Required | Type | Description |
+| :---: | :--- | :---: | :---: | :---: |
+|namespace|`unset`|true|str|The OCP namespace to use for created resources|
+|name_controller|`unset`|false|str|The name of the created AutomationController resources|
+|name_gateway|`unset`|false|str|The name of the created AutomationAutomationPlatform resource|
+|name_eda|`unset`|false|str|The name of the created AutomationHub resource|
+|name_hub|`unset`|false|str|The name of the created EDA resource|
+|ansibleautomationplatform|`unset`|false|dict|The dictionary configuration for the AnsibleAutomationPlatform resource|
+|automationcontroller|`unset`|false|dict|The dictionary configuration for the AutomationController resource|
+|automationhub|`unset`|false|dict|The dictionary configuration for the AutomationHub resource|
+|eda|`unset`|false|dict|The dictionary configuration for the EDA resource|
+|template_dir|`../kubemanifests/{{ inventory_hostname }}/generated`|false|str|The directory to generate the kubemanifests in|
+|template_empty|`false`|false|str|Whether to delete existing files in the template directory|
 
 Dependencies
 ------------
 
 A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
 
-Example Playbook
-----------------
-
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
-
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
-
 License
 -------
 
-BSD
+GPL-3.0-or-later
 
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+Homero Pawlowski (hpawlows@redhat.com)

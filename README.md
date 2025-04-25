@@ -1,9 +1,6 @@
-# Escwq Kubemanifests Collection
+# escwq.kubemanifests collection
 
 This repository contains the `escwq.kubemanifests` Ansible Collection.
-
-<!--start requires_ansible-->
-<!--end requires_ansible-->
 
 ## External requirements
 
@@ -13,8 +10,19 @@ which requirements are needed.
 
 ## Included content
 
-<!--start collection content-->
-<!--end collection content-->
+Some examples are provided in this collection.
+
+- `inventory/` has example inventory and host_var variables that can be used with the roles in this collection.
+- `kubemanifests/` has example output of the generated kubemanifests when using the `eswq.kubemanifests.template`
+- `playbooks/` has example playbooks of using each role.
+
+e.g. The below would generate the content in the example `kubemanifests/`:
+
+```
+ansible-playbook \
+  -i inventory/hosts.ini \
+  playbooks/generate_kubemanifests.yml
+```
 
 ## Using this collection
 
