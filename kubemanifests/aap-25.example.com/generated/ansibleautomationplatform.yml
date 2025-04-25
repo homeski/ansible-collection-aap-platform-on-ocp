@@ -1,0 +1,19 @@
+apiVersion: aap.ansible.com/v1alpha1
+kind: AnsibleAutomationPlatform
+metadata:
+  name: myaap-gateway
+  namespace: aap-25
+spec:
+  admin_password_secret: myaap-controller-admin-password
+  controller:
+    disabled: false
+    name: myaap-controller
+  database:
+    database_secret: myaap-gateway-postgres-configuration
+  db_fields_encryption_secret: myaap-controller-secret-key
+  eda:
+    disabled: true
+  hub:
+    disabled: true
+  no_log: true
+  route_host: aap-25.example.com

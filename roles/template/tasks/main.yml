@@ -1,0 +1,36 @@
+---
+- when: ansibleautomationplatform is defined or automationcontroller is defined or automationhub is defined or eda is defined # noqa name[missing]
+  block:
+    - name: Empty directory, if exists
+      ansible.builtin.file:
+        path: "{{ template_dir }}"
+        state: absent
+      when: template_empty | bool
+
+    - name: Create directory
+      ansible.builtin.file:
+        mode: '0775'
+        path: "{{ template_dir }}"
+        state: directory
+
+- name: Template ansibleautomationplatform.yml
+  ansible.builtin.copy:
+    content: "{{ lookup('ansible.builtin.template', 'templates/ansibleautomationplatform.yml.j2') | from_yaml | combine(ansibleautomationplatform, recursive=true) | to_nice_yaml(2) }}" # noqa yaml[line-length]
+    dest: "{{ template_dir }}/ansibleautomationplatform.yml"
+    mode: '0644'
+  when: ansibleautomationplatform is defined and ansibleautomationplatform
+
+- name: Template automationcontroller.yml
+  ansible.builtin.copy:
+    content: "{{ lookup('ansible.builtin.template', 'templates/automationcontroller.yml.j2') | from_yaml | combine(automationcontroller, recursive=true) | to_nice_yaml(2) }}" # noqa yaml[line-length]
+    dest: "{{ template_dir }}/automationcontroller.yml"
+    mode: '0644'
+  when: automationcontroller is defined and automationcontroller
+
+- name: Template secrets
+  ansible.builtin.copy:
+    content: "{{ lookup('ansible.builtin.template', 'templates/secret.yml.j2') | from_yaml | to_nice_yaml(2) }}"
+    dest: "{{ template_dir }}/{{ item.name }}.yml"
+    mode: '0644'
+  loop: "{{ secrets }}"
+  when: secrets is defined

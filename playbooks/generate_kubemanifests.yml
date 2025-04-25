@@ -1,0 +1,10 @@
+---
+- name: Generate kubemanifests files
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Import role
+      ansible.builtin.import_role:
+        name: escwq.kubemanifests.template
+      delegate_to: localhost
+      when: namespace is defined

@@ -1,0 +1,19 @@
+---
+apiVersion: aap.ansible.com/v1alpha1
+kind: AnsibleAutomationPlatform
+metadata:
+  name: {{ name_gateway }}
+  namespace: {{ namespace}}
+spec:
+  no_log: true
+
+  database: {}
+
+  controller:
+    disabled: true
+
+  eda:
+    disabled: true
+
+  hub:
+    disabled: true
