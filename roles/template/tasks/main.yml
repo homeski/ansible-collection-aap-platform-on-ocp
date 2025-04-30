@@ -50,6 +50,13 @@
     mode: '0644'
   when: automationhub is defined and automationhub
 
+- name: Template EDA.yml
+  ansible.builtin.copy:
+    content: "{{ lookup('ansible.builtin.template', 'templates/eda.yml.j2') | from_yaml | combine(eda, recursive=true) | to_nice_yaml(2) }}" # noqa yaml[line-length]
+    dest: "{{ template_dir }}/crs/eda.yml"
+    mode: '0644'
+  when: eda is defined and eda
+
 - name: Template secrets
   ansible.builtin.copy:
     content: "{{ lookup('ansible.builtin.template', 'templates/secret.yml.j2') | from_yaml | to_nice_yaml(2) }}"
