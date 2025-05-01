@@ -1,0 +1,33 @@
+apiVersion: eda.ansible.com/v1alpha1
+kind: EDA
+metadata:
+  name: myaap-eda
+  namespace: aap-25
+spec:
+  activation_worker:
+    replicas: 2
+  admin_password_secret: myaap-eda-admin-password
+  admin_user: admin
+  api:
+    gunicorn_workers: 2
+    replicas: 1
+  automation_server_ssl_verify: 'no'
+  automation_server_url: https://aap-25.example.com
+  database:
+    database_secret: myaap-eda-postgres-configuration
+  default_worker:
+    replicas: 2
+  event_stream:
+    gunicorn_workers: 2
+    replicas: 1
+  image_pull_policy: IfNotPresent
+  ingress_type: Route
+  no_log: true
+  redis:
+    replicas: 1
+  scheduler:
+    replicas: 2
+  ui:
+    replicas: 1
+  worker:
+    replicas: 2

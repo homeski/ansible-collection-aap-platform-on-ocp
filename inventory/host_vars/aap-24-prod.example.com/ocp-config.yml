@@ -3,14 +3,34 @@ namespace: aap-24-prod
 name_gateway: ""
 name_controller: aap-24-prod
 name_eda: ""
-name_hub: ""
+name_hub: hub-prod
 
 automationcontroller:
   spec:
     admin_password_secret: "{{ name_controller }}-admin-password"
     route_host: aap-24-prod.example.com
 
+automationhub:
+  spec:
+    admin_password_secret: "{{ name_hub }}-admin-password"
+    postgres_configuration_secret: "{{ name_hub }}-prod-postgres-configuration"
+    route_host: aap-24-prod.example.com
+
 secrets:
   - name: "{{ name_controller }}-admin-password"
     data:
       password: foobar
+
+  - name: "{{ name_hub }}-admin-password"
+    data:
+      password: foobar2
+
+  - name: "{{ name_hub }}-postgres-configuration"
+    data:
+      host: 127.0.0.1
+      port: 5415
+      database: hub-prod
+      username: postgres
+      password: example
+      sslmode: prefer
+      type: unmanaged

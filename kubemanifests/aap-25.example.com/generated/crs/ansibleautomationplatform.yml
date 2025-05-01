@@ -12,8 +12,10 @@ spec:
     database_secret: myaap-gateway-postgres-configuration
   db_fields_encryption_secret: myaap-controller-secret-key
   eda:
-    disabled: true
+    disabled: false
+    name: myaap-eda
   hub:
-    disabled: true
+    disabled: false
+    name: myaap-hub
   no_log: true
   route_host: aap-25.example.com

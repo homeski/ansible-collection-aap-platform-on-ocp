@@ -2,8 +2,8 @@
 namespace: aap-25
 name_gateway: myaap-gateway
 name_controller: myaap-controller
-name_eda: ""
-name_hub: ""
+name_eda: myaap-eda
+name_hub: myaap-hub
 
 ansibleautomationplatform:
   spec:
@@ -11,6 +11,12 @@ ansibleautomationplatform:
     controller:
       disabled: false
       name: "{{ name_controller }}"
+    hub:
+      disabled: false
+      name: "{{ name_hub }}"
+    eda:
+      disabled: false
+      name: "{{ name_eda }}"
     database:
       database_secret: "{{ name_gateway }}-postgres-configuration"
     db_fields_encryption_secret: "{{ name_controller }}-secret-key"
@@ -19,8 +25,22 @@ ansibleautomationplatform:
 automationcontroller:
   spec:
     admin_password_secret: "{{ name_controller }}-admin-password"
+    api_urlpattern_prefix: controller
     postgres_configuration_secret: "{{ name_controller }}-postgres-configuration"
     secret_key_secret: "{{ name_controller }}-secret-key"
+
+automationhub:
+  spec:
+    admin_password_secret: "{{ name_hub }}-admin-password"
+    postgres_configuration_secret: "{{ name_hub }}-postgres-configuration"
+
+eda:
+  spec:
+    admin_password_secret: "{{ name_eda }}-admin-password"
+    automation_server_url: https://aap-25.example.com
+    automation_server_ssl_verify: "no"
+    database:
+      database_secret: "{{ name_eda }}-postgres-configuration"
 
 secrets:
   - name: "{{ name_gateway }}-postgres-configuration"
@@ -43,10 +63,38 @@ secrets:
       sslmode: prefer
       type: unmanaged
 
+  - name: "{{ name_hub }}-postgres-configuration"
+    data:
+      host: 127.0.0.1
+      port: 5415
+      database: hub-25
+      username: postgres
+      password: example
+      sslmode: prefer
+      type: unmanaged
+
+  - name: "{{ name_eda }}-postgres-configuration"
+    data:
+      host: 127.0.0.1
+      port: 5415
+      database: eda-25
+      username: postgres
+      password: example
+      sslmode: prefer
+      type: unmanaged
+
   - name: "{{ name_controller }}-admin-password"
     data:
       password: foobar
 
+  - name: "{{ name_hub }}-admin-password"
+    data:
+      password: foobar3
+
   - name: "{{ name_controller }}-secret-key"
     data:
       secret_key: encryptionkey
+
+  - name: "{{ name_eda }}-admin-password"
+    data:
+      password: foobar2
