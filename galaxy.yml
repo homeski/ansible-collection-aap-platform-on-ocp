@@ -1,37 +1,18 @@
 ---
-# This collection is initialized by https://github.com/ansible/ansible-creator 25.4.0
-
-# See https://docs.ansible.com/ansible/latest/dev_guide/collections_galaxy_meta.html
-
 namespace: "aap"
 name: "platform_on_ocp"
 version: 1.0.0
+description: A collection containing roles that help to create, deploy, and manage k8s resources associated with a Red Hat Ansible Automation Platform Operator installation.
 readme: README.md
 authors:
-  - Homero Pawlowski <homeski2@gmail.com>
-description: A collection containing roles that help to create, deploy, and manage k8s resources associated with a Red Hat Ansible Automation Platform Operator installation.
+  - Homero Pawlowski @homeski
+repository: https://github.com/homeski/ansible-collection-aap-platform-on-ocp
+issues: https://github.com/homeski/ansible-collection-aap-platform-on-ocp/issues
+build_ignore:
+  - .gitignore
+  - changelogs/.plugin-cache.yaml
 license_file: LICENSE
 tags:
   - openshift
   - aap
   - operator
-dependencies:
-  "ansible.utils": "*"
-repository: https://github.com/homeski/ansible-collection-aap-platform-on-ocp
-documentation: https://github.com/homeski/ansible-collection-aap-platform-on-ocp/blob/main/README.md
-homepage: https://github.com/homeski/ansible-collection-aap-platform-on-ocp
-issues: https://github.com/homeski/ansible-collection-aap-platform-on-ocp/issues
-
-# A list of file glob-like patterns used to filter any files or directories that should not be included in the build
-# artifact. A pattern is matched from the relative path of the file or directory of the collection directory. This
-# uses 'fnmatch' to match the files or directories. Some directories and files like 'galaxy.yml', '*.pyc', '*.retry',
-# and '.git' are always filtered. Mutually exclusive with 'manifest'
-build_ignore:
-  - .gitignore
-  - changelogs/.plugin-cache.yaml
-# A dict controlling use of manifest directives used in building the collection artifact. The key 'directives' is a
-# list of MANIFEST.in style
-# L(directives,https://packaging.python.org/en/latest/guides/using-manifest-in/#manifest-in-commands). The key
-# 'omit_default_directives' is a boolean that controls whether the default directives are used. Mutually exclusive
-# with 'build_ignore'
-# manifest: null

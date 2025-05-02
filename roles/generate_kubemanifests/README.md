@@ -35,7 +35,7 @@ License
 
 GPL-3.0-or-later
 
-Author Information
+Author
 ------------------
 
-Homero Pawlowski (homeski2@gmail.com)
+[Homero Pawlowski](https://github.com/homeski)
