@@ -3,27 +3,24 @@
 
 # See https://docs.ansible.com/ansible/latest/dev_guide/collections_galaxy_meta.html
 
-namespace: "escwq"
-name: "kubemanifests"
+namespace: "aap"
+name: "platform_on_ocp"
 version: 1.0.0
 readme: README.md
 authors:
-  - Homero Pawlowski <hpawlows@redhat.com>
-
+  - Homero Pawlowski <homeski2@gmail.com>
 description: A collection containing roles that help to create, deploy, and manage k8s resources associated with a Red Hat Ansible Automation Platform Operator installation.
 license_file: LICENSE
-
-# TO-DO: update the tags based on your content type
-tags: ["openshift", "aap", "operator"]
-
-# TO-DO: maintain this list to reflect the collection's dependencies
+tags:
+  - openshift
+  - aap
+  - operator
 dependencies:
-  "ansible.utils": "*" # note: "*" selects the latest version available
-
-repository: http://example.com/repository
-documentation: http://docs.example.com
-homepage: http://example.com
-issues: http://example.com/issue/tracker
+  "ansible.utils": "*"
+repository: https://github.com/homeski/ansible-collection-aap-platform-on-ocp
+documentation: https://github.com/homeski/ansible-collection-aap-platform-on-ocp/blob/main/README.md
+homepage: https://github.com/homeski/ansible-collection-aap-platform-on-ocp
+issues: https://github.com/homeski/ansible-collection-aap-platform-on-ocp/issues
 
 # A list of file glob-like patterns used to filter any files or directories that should not be included in the build
 # artifact. A pattern is matched from the relative path of the file or directory of the collection directory. This

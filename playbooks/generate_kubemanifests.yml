@@ -5,6 +5,6 @@
   tasks:
     - name: Import role
       ansible.builtin.import_role:
-        name: escwq.kubemanifests.template
+        name: aap.platform_on_ocp.generate_kubemanifests
       delegate_to: localhost
       when: namespace is defined

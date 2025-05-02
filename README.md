@@ -1,6 +1,6 @@
-# escwq.kubemanifests collection
+# aap.platform_on_ocp collection
 
-This repository contains the `escwq.kubemanifests` Ansible Collection.
+This repository contains the `aap.platform_on_ocp` Ansible Collection.
 
 ## External requirements
 
@@ -13,7 +13,7 @@ which requirements are needed.
 Some examples are provided in this collection.
 
 - `inventory/` has example inventory and host_var variables that can be used with the roles in this collection.
-- `kubemanifests/` has example output of the generated kubemanifests when using the `eswq.kubemanifests.template`
+- `kubemanifests/` has example output of the generated kubernetes manifests when using `aap.platform_on_ocp.generate_kubemanifests`
 - `playbooks/` has example playbooks of using each role.
 
 e.g. The below would generate the content in the example `kubemanifests/`:
@@ -27,7 +27,7 @@ ansible-playbook \
 ## Using this collection
 
 ```bash
-    ansible-galaxy collection install escwq.kubemanifests
+    ansible-galaxy collection install aap.platform_on_ocp
 ```
 
 You can also include it in a `requirements.yml` file and install it via
@@ -35,23 +35,23 @@ You can also include it in a `requirements.yml` file and install it via
 
 ```yaml
 collections:
-  - name: escwq.kubemanifests
+  - name: aap.platform_on_ocp
 ```
 
 To upgrade the collection to the latest available version, run the following
 command:
 
 ```bash
-ansible-galaxy collection install escwq.kubemanifests --upgrade
+ansible-galaxy collection install aap.platform_on_ocp --upgrade
 ```
 
 You can also install a specific version of the collection, for example, if you
 need to downgrade when something is broken in the latest version (please report
 an issue in this repository). Use the following syntax where `X.Y.Z` can be any
-[available version](https://galaxy.ansible.com/escwq/kubemanifests):
+[available version](https://galaxy.ansible.com/aap/platform_on_ocp):
 
 ```bash
-ansible-galaxy collection install escwq.kubemanifests:==X.Y.Z
+ansible-galaxy collection install aap.platform_on_ocp:==X.Y.Z
 ```
 
 See
@@ -61,7 +61,7 @@ for more details.
 ## Release notes
 
 See the
-[changelog](https://github.com/ansible-collections/escwq.kubemanifests/tree/main/CHANGELOG.rst).
+[changelog](https://github.com/homeski/ansible-collection-aap-platform-on-ocp/blob/main/CHANGELOG.rst).
 
 ## Roadmap
 

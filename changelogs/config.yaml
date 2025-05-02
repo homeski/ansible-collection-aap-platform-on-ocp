@@ -29,5 +29,5 @@ sections:
     - Known Issues
   - - doc_changes
     - Documentation Changes
-title: "escwq.kubernetes collection"
+title: "aap.platform_on_ocp collection"
 trivial_section_name: trivial

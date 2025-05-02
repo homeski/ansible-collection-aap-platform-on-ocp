@@ -1,4 +1,4 @@
-Role Name
+generate_kubemanifests
 =========
 
 A role to template the Kubernetes manifest files needed for an AAP Operator installation.

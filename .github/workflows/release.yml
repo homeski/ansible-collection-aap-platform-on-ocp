@@ -1,5 +1,5 @@
 ---
-name: Release escwq.kubemanifests
+name: Release aap.platform_on_ocp
 
 on: # yamllint disable-line rule:truthy
   release:

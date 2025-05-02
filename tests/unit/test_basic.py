@@ -1,4 +1,4 @@
-"""Unit tests for escwq.kubemanifests."""
+"""Unit tests for aap.platform_on_ocp."""
 
 
 def test_basic() -> None:
