@@ -10,6 +10,7 @@ automationcontroller:
     admin_password_secret: "{{ name_controller }}-admin-password"
     route_host: controller-dev.example.com
 
+automationhub:
   spec:
     admin_password_secret: "{{ name_hub }}-admin-password"
     route_host: hub-dev.example.com
