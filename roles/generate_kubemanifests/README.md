@@ -16,8 +16,8 @@ Role Variables
 |namespace|`unset`|true|str|The OCP namespace to use for created resources|
 |name_controller|`unset`|false|str|The name of the created AutomationController resources|
 |name_gateway|`unset`|false|str|The name of the created AutomationAutomationPlatform resource|
-|name_eda|`unset`|false|str|The name of the created AutomationHub resource|
-|name_hub|`unset`|false|str|The name of the created EDA resource|
+|name_eda|`unset`|false|str|The name of the created EDA resource|
+|name_hub|`unset`|false|str|The name of the created AutomationHub resource|
 |ansibleautomationplatform|`unset`|false|dict|The dictionary configuration for the AnsibleAutomationPlatform resource|
 |automationcontroller|`unset`|false|dict|The dictionary configuration for the AutomationController resource|
 |automationhub|`unset`|false|dict|The dictionary configuration for the AutomationHub resource|
@@ -38,4 +38,4 @@ GPL-3.0-or-later
 Author Information
 ------------------
 
-Homero Pawlowski (hpawlows@redhat.com)
+Homero Pawlowski (homeski2@gmail.com)
