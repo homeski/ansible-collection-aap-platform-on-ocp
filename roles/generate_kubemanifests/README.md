@@ -22,6 +22,8 @@ Role Variables
 |automationcontroller|`unset`|false|dict|The dictionary configuration for the AutomationController resource|
 |automationhub|`unset`|false|dict|The dictionary configuration for the AutomationHub resource|
 |eda|`unset`|false|dict|The dictionary configuration for the EDA resource|
+|secrets|`unset`|false|list|List of secrets to generate kubemanifests for|
+|configmaps|`unset`|false|list|List of configmaps to generate kubemanifests for|
 |generate_kubemanifests_template_dir|`../kubemanifests/{{ inventory_hostname }}/generated`|false|str|The directory to generate the kubemanifests in|
 |generate_kubemanifests_template_empty|`false`|false|str|Whether to delete existing files in the template directory|
 
