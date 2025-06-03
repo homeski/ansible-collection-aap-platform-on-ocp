@@ -23,3 +23,9 @@ secrets:
   - name: "{{ name_hub }}-admin-password"
     data:
       password: foobar2
+
+configmaps:
+  - name: "{{ name_controller }}-rsyslog-configmap"
+    data:
+      rsyslog.conf: |
+        $MaxMessageSize 1000000
