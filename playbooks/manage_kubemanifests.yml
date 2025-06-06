@@ -1,0 +1,13 @@
+---
+- name: Manage kubemanifests
+  hosts: all
+  gather_facts: false
+  vars:
+    state: "{{ default('present') }}"
+  tasks:
+    - name: Import role
+      ansible.builtin.import_role:
+        name: aap.platform_on_ocp.manage_kubemanifests
+      vars:
+        manage_kubemanifests_state: "{{ state }}"
+      delegate_to: localhost

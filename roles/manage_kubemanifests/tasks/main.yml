@@ -1,0 +1,78 @@
+---
+- name: Manage secrets
+  ansible.builtin.include_tasks:
+    file: manage_kubemanifest.yml
+    apply:
+      tags:
+        - secrets
+  with_fileglob: "{{ manage_kubemanifests_template_dir }}/secrets/*"
+  when: secrets is defined and secrets
+  tags:
+    - all
+    - never
+    - secrets
+
+- name: Manage configmaps
+  ansible.builtin.include_tasks:
+    file: manage_kubemanifest.yml
+    apply:
+      tags:
+        - configmaps
+  with_fileglob: "{{ manage_kubemanifests_template_dir }}/configmaps/*"
+  when: configmaps is defined and configmaps
+  tags:
+    - all
+    - never
+    - configmaps
+
+- name: Manage automationcontroller
+  ansible.builtin.include_tasks:
+    file: manage_kubemanifest.yml
+    apply:
+      tags:
+        - automationcontroller
+  with_fileglob: "{{ manage_kubemanifests_template_dir }}/crs/automationcontroller.yml"
+  when: automationcontroller is defined
+  tags:
+    - all
+    - never
+    - automationcontroller
+
+- name: Manage automationhub
+  ansible.builtin.include_tasks:
+    file: manage_kubemanifest.yml
+    apply:
+      tags:
+        - automationhub
+  with_fileglob: "{{ manage_kubemanifests_template_dir }}/crs/automationhub.yml"
+  when: automationhub is defined
+  tags:
+    - all
+    - never
+    - automationhub
+
+- name: Manage eda
+  ansible.builtin.include_tasks:
+    file: manage_kubemanifest.yml
+    apply:
+      tags:
+        - eda
+  with_fileglob: "{{ manage_kubemanifests_template_dir }}/crs/eda.yml"
+  when: eda is defined
+  tags:
+    - all
+    - never
+    - eda
+
+- name: Manage automationplatform
+  ansible.builtin.include_tasks:
+    file: manage_kubemanifest.yml
+    apply:
+      tags:
+        - automationplatform
+  with_fileglob: "{{ manage_kubemanifests_template_dir }}/crs/automationplatform.yml"
+  when: automationplatform is defined
+  tags:
+    - all
+    - never
+    - automationplatform

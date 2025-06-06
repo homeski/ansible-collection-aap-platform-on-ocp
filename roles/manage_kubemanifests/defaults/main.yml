@@ -1,0 +1,3 @@
+---
+manage_kubemanifests_template_dir: "{{ (playbook_dir, '..', 'kubemanifests', inventory_hostname, 'generated') | path_join }}"
+manage_kubemanifests_state: present

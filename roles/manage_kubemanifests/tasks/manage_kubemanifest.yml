@@ -1,0 +1,18 @@
+---
+- name: Set fact
+  ansible.builtin.set_fact:
+    kubemanifest: "{{ lookup('ansible.builtin.file', item) | from_yaml }}"
+
+- name: "Get {{ kubemanifest.kind | lower }}/{{ kubemanifest.metadata.name }} -n {{ kubemanifest.metadata.namespace }}"
+  kubernetes.core.k8s_info:
+    api_version: "{{ kubemanifest.apiVersion }}"
+    kind: "{{ kubemanifest.kind }}"
+    name: "{{ kubemanifest.metadata.name }}"
+    namespace: "{{ kubemanifest.metadata.namespace }}"
+  register: result
+
+- name: "Manage {{ kubemanifest.kind | lower }}/{{ kubemanifest.metadata.name }} -n {{ kubemanifest.metadata.namespace }}"
+  kubernetes.core.k8s:
+    state: "{{ manage_kubemanifests_state }}"
+    src: "{{ item }}"
+    wait: true
