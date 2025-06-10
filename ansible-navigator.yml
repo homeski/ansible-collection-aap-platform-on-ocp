@@ -1,0 +1,24 @@
+---
+ansible-navigator:
+  ansible:
+    inventory:
+      entries:
+        - ./inventory/hosts.ini
+
+  execution-environment:
+    image: registry.redhat.io/ansible-automation-platform-25/ee-supported-rhel8:latest
+    pull:
+      policy: missing
+    volume-mounts:
+      - dest: /usr/share/ansible/collections
+        src: ~/.ansible/collections
+        options: Z
+
+  logging:
+    file: /tmp/ansible-navigator.log
+
+  mode: stdout
+
+  playbook-artifact:
+    enable: false
+...

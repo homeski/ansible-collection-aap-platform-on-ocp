@@ -6,4 +6,4 @@ metadata:
 data:
   rsyslog.conf: '$MaxMessageSize 1000000
 
-    '
+'
