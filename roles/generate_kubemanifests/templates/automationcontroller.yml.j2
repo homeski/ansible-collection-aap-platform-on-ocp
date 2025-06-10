@@ -3,7 +3,7 @@ apiVersion: automationcontroller.ansible.com/v1beta1
 kind: AutomationController
 metadata:
   name: {{ name_controller }}
-  namespace: {{ namespace }}
+  namespace: {{ ocp_namespace }}
 spec:
   admin_user: admin
   auto_upgrade: false

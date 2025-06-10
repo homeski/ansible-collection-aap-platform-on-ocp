@@ -1,5 +1,5 @@
 ---
-namespace: aap-24-dev
+ocp_namespace: aap-24-dev
 name_gateway: ""
 name_controller: controller-dev
 name_eda: ""

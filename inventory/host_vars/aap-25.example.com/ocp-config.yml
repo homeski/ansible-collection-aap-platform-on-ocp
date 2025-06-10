@@ -1,5 +1,5 @@
 ---
-namespace: aap-25
+ocp_namespace: aap-25
 name_gateway: myaap-gateway
 name_controller: myaap-controller
 name_eda: myaap-eda

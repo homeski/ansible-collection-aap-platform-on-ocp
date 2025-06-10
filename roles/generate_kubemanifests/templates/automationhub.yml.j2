@@ -3,7 +3,7 @@ apiVersion: automationhub.ansible.com/v1beta1
 kind: AutomationHub
 metadata:
   name: {{ name_hub }}
-  namespace: {{ namespace }}
+  namespace: {{ ocp_namespace }}
 spec:
   api:
     log_level: INFO

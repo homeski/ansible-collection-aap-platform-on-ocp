@@ -1,0 +1,1 @@
+roles/manage_kubemanifests/tasks/manage_kubemanifest.yml name[template]

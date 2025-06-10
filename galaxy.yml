@@ -2,7 +2,9 @@
 namespace: "aap"
 name: "platform_on_ocp"
 version: 1.0.0
-description: A collection containing roles that help to create, deploy, and manage k8s resources associated with a Red Hat Ansible Automation Platform Operator installation.
+description: >
+  A collection containing roles that help to create, deploy, and manage k8s resources
+  associated with a Red Hat Ansible Automation Platform Operator deployment.
 readme: README.md
 authors:
   - Homero Pawlowski @homeski
@@ -13,6 +15,7 @@ build_ignore:
   - changelogs/.plugin-cache.yaml
 license_file: LICENSE
 tags:
-  - openshift
   - aap
+  - cloud
+  - openshift
   - operator

@@ -1,6 +1,6 @@
 galaxy_info:
   author: Homero Pawlowski
-  description: A role to template the Kubernetes manifest files needed for an AAP Operator installation.
+  description: A role to manage (create, apply, or delete) the Kubernetes manifest files created for an AAP Operator deployment.
   license: GPL-3.0-or-later
   min_ansible_version: '2.14'
 
