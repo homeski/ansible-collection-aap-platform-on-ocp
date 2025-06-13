@@ -1,0 +1,16 @@
+---
+- name: Include task
+  ansible.builtin.include_tasks:
+    file: manage_kubemanifest.yml
+
+- name: Poll until /login returns 200
+  ansible.builtin.uri:
+    url: "https://{{ kubemanifest.spec.route_host | default('foobar') }}/#/login"
+    follow_redirects: none
+    method: GET
+    validate_certs: "{{ manage_kubemanifests_validate_certs }}"
+  register: _result
+  until: _result.status == 200
+  retries: 40
+  delay: 15
+  when: not name_gateway or name_gateway == ""
