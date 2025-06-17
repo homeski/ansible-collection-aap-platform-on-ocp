@@ -70,8 +70,8 @@
     apply:
       tags:
         - automationplatform
-  with_fileglob: "{{ manage_kubemanifests_template_dir }}/crs/automationplatform.yml"
-  when: automationplatform is defined
+  with_fileglob: "{{ manage_kubemanifests_template_dir }}/crs/ansibleautomationplatform.yml"
+  when: ansibleautomationplatform is defined
   tags:
     - all
     - never
