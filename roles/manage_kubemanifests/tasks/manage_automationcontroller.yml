@@ -13,4 +13,4 @@
   until: _result.status == 200
   retries: 40
   delay: 15
-  when: (not name_gateway or name_gateway == "") and state == 'present'
+  when: (not name_gateway is defined or name_gateway == "") and state == 'present'
