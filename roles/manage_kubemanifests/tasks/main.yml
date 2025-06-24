@@ -66,13 +66,13 @@
 
 - name: Manage automationplatform
   ansible.builtin.include_tasks:
-    file: manage_kubemanifest.yml
+    file: manage_ansibleautomationplatform.yml
     apply:
       tags:
-        - automationplatform
+        - ansibleautomationplatform
   with_fileglob: "{{ manage_kubemanifests_template_dir }}/crs/ansibleautomationplatform.yml"
   when: ansibleautomationplatform is defined
   tags:
     - all
     - never
-    - automationplatform
+    - ansibleautomationplatform
