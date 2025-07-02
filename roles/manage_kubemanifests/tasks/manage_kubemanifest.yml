@@ -9,10 +9,54 @@
     kind: "{{ kubemanifest.kind }}"
     name: "{{ kubemanifest.metadata.name }}"
     namespace: "{{ kubemanifest.metadata.namespace }}"
-  register: result
 
 - name: "Manage {{ kubemanifest.kind | lower }}/{{ kubemanifest.metadata.name }} -n {{ kubemanifest.metadata.namespace }}"
   kubernetes.core.k8s:
     state: "{{ manage_kubemanifests_state }}"
     src: "{{ item }}"
     wait: true
+
+- name: "Wait until {{ kubemanifest.kind | lower }}/{{ kubemanifest.metadata.name }} -n {{ kubemanifest.metadata.namespace }} is ready"
+  kubernetes.core.k8s_info:
+    api_version: "{{ kubemanifest.apiVersion }}"
+    kind: "{{ kubemanifest.kind }}"
+    name: "{{ kubemanifest.metadata.name }}"
+    namespace: "{{ kubemanifest.metadata.namespace }}"
+  register: _result
+  # The first  or block captures completed conditions for ansibleautomationplatform, automationcontroller
+  # The second or block captures completed conditions for automationhub
+  until: >
+    (
+      _result.resources.0.status is defined and
+      (
+        _result.resources.0.status.conditions |
+        selectattr('type', 'equalto', 'Running') |
+        selectattr('status', 'equalto', 'True') |
+        first
+      ) is defined and
+      (
+        _result.resources.0.status.conditions |
+        selectattr('type', 'equalto', 'Successful') |
+        selectattr('status', 'equalto', 'True') |
+        first
+      ) is defined
+    ) or
+    (
+      _result.resources.0.status is defined and
+      (
+        _result.resources.0.status.conditions |
+        selectattr('type', 'equalto', 'Automationhub-Operator-Finished-Execution') |
+        selectattr('status', 'equalto', 'True') |
+        first
+      ) is defined
+    )
+  retries: 60
+  delay: 15
+  when: >
+    (
+      kubemanifest.kind | lower == 'ansibleautomationplatform' or
+      kubemanifest.kind | lower == 'automationcontroller' or
+      kubemanifest.kind | lower == 'automationhub' or
+      kubemanifest.kind | lower == 'eda'
+    ) and
+    state == 'present'

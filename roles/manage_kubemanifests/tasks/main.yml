@@ -27,7 +27,7 @@
 
 - name: Manage automationcontroller
   ansible.builtin.include_tasks:
-    file: manage_automationcontroller.yml
+    file: manage_kubemanifest.yml
     apply:
       tags:
         - automationcontroller
@@ -40,7 +40,7 @@
 
 - name: Manage automationhub
   ansible.builtin.include_tasks:
-    file: manage_automationhub.yml
+    file: manage_kubemanifest.yml
     apply:
       tags:
         - automationhub
@@ -53,7 +53,7 @@
 
 - name: Manage eda
   ansible.builtin.include_tasks:
-    file: manage_eda.yml
+    file: manage_kubemanifest.yml
     apply:
       tags:
         - eda
@@ -66,7 +66,7 @@
 
 - name: Manage automationplatform
   ansible.builtin.include_tasks:
-    file: manage_ansibleautomationplatform.yml
+    file: manage_kubemanifest.yml
     apply:
       tags:
         - ansibleautomationplatform
