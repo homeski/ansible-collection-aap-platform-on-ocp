@@ -2,82 +2,55 @@
 
 This repository contains the `aap.platform_on_ocp` Ansible Collection.
 
-## External requirements
+This is an Ansible Collection that helps create, deploy, and manage Kubernetes resources for Red Hat Ansible Automation Platform (AAP) Operator deployments on OpenShift Container Platform (OCP).
 
-Some modules and plugins require external libraries. Please check the
-requirements for each plugin or module you use in the documentation to find out
-which requirements are needed.
+## Core Components
 
-## Included content
+### Roles
+- **generate_kubemanifests**: Templates Kubernetes manifest files for AAP Operator installation
+- **manage_kubemanifests**: Manages (create/apply/delete) the generated Kubernetes manifests
 
-Some examples are provided in this collection.
+### Directory Structure
+- `inventory/`: Example inventory with host_vars for different environments (dev/prod/25)
+- `kubemanifests/`: Generated Kubernetes manifests organized by environment
+- `playbooks/`: Example playbooks demonstrating role usage
+- `roles/`: The two main roles with their templates and tasks
 
-- `inventory/` has example inventory and host_var variables that can be used with the roles in this collection.
-- `kubemanifests/` has example output of the generated kubernetes manifests when using `aap.platform_on_ocp.generate_kubemanifests`
-- `playbooks/` has example playbooks of using each role.
+## Common Commands
 
-e.g. The below would generate the content in the example `kubemanifests/`:
-
-```
-ansible-playbook \
-  -i inventory/hosts.ini \
-  playbooks/generate_kubemanifests.yml
-```
-
-## Using this collection
-
+### Development and Testing
 ```bash
-    ansible-galaxy collection install aap.platform_on_ocp
+# Run example playbook to generate manifests
+ansible-playbook -i inventory/hosts.ini playbooks/generate_kubemanifests.yml
+
+# Run example playbook to manage manifests
+ansible-playbook -i inventory/hosts.ini playbooks/manage_kubemanifests.yml
+
+# Use ansible-navigator (configured for execution environment)
+ansible-navigator run playbooks/generate_kubemanifests.yml
 ```
 
-You can also include it in a `requirements.yml` file and install it via
-`ansible-galaxy collection install -r requirements.yml` using the format:
-
-```yaml
-collections:
-  - name: aap.platform_on_ocp
-```
-
-To upgrade the collection to the latest available version, run the following
-command:
-
+### Collection Management
 ```bash
-ansible-galaxy collection install aap.platform_on_ocp --upgrade
+# Build collection
+ansible-galaxy collection build
+
+# Install locally for testing
+ansible-galaxy collection install aap-platform_on_ocp-*.tar.gz --force
 ```
 
-You can also install a specific version of the collection, for example, if you
-need to downgrade when something is broken in the latest version (please report
-an issue in this repository). Use the following syntax where `X.Y.Z` can be any
-[available version](https://galaxy.ansible.com/aap/platform_on_ocp):
+## Architecture
 
-```bash
-ansible-galaxy collection install aap.platform_on_ocp:==X.Y.Z
-```
+The collection follows the standard workflow:
+1. Define environment-specific variables in `inventory/host_vars/`
+2. Use `generate_kubemanifests` role to template Kubernetes resources
+3. Use `manage_kubemanifests` role to apply/manage those resources on OpenShift
 
-See
-[Ansible Using Collections](https://docs.ansible.com/ansible/latest/user_guide/collections_using.html)
-for more details.
-
-## Release notes
-
-See the
-[changelog](https://github.com/homeski/ansible-collection-aap-platform-on-ocp/blob/main/CHANGELOG.rst).
-
-## Roadmap
-
-<!-- Optional. Include the roadmap for this collection, and the proposed release/versioning strategy so users can anticipate the upgrade/update cycle. -->
-
-## More information
-
-<!-- List out where the user can find additional information, such as working group meeting times, slack/matrix channels, or documentation for the product this collection automates. At a minimum, link to: -->
-
-- [Ansible collection development forum](https://forum.ansible.com/c/project/collection-development/27)
-- [Ansible User guide](https://docs.ansible.com/ansible/devel/user_guide/index.html)
-- [Ansible Developer guide](https://docs.ansible.com/ansible/devel/dev_guide/index.html)
-- [Ansible Collections Checklist](https://docs.ansible.com/ansible/devel/community/collection_contributors/collection_requirements.html)
-- [Ansible Community code of conduct](https://docs.ansible.com/ansible/devel/community/code_of_conduct.html)
-- [The Bullhorn (the Ansible Contributor newsletter)](https://docs.ansible.com/ansible/devel/community/communication.html#the-bullhorn)
-- [News for Maintainers](https://forum.ansible.com/tag/news-for-maintainers)
+### Environment Structure
+Each host (e.g., `aap-24-dev.example.com`) has:
+- Host variables in `inventory/host_vars/`
+- Generated manifests in `kubemanifests/{hostname}/generated/`
+- Generated manifests are organized into `crs/`, `secrets/`, and `configmaps/` subdirectories
 
 ## Licensing
 
