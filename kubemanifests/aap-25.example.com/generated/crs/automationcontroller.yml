@@ -7,9 +7,9 @@ spec:
   admin_password_secret: myaap-controller-admin-password
   admin_user: admin
   api_urlpattern_prefix: controller
-  auto_upgrade: false
+  auto_upgrade: true
   create_preload_data: false
-  garbage_collect_secrets: false
+  garbage_collect_secrets: true
   image_pull_policy: IfNotPresent
   ingress_type: Route
   ipv6_disabled: false

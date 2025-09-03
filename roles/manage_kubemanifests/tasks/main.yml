@@ -1,17 +1,4 @@
 ---
-- name: Manage secrets
-  ansible.builtin.include_tasks:
-    file: manage_kubemanifest.yml
-    apply:
-      tags:
-        - secrets
-  with_fileglob: "{{ manage_kubemanifests_template_dir }}/secrets/*"
-  when: secrets is defined and secrets
-  tags:
-    - all
-    - never
-    - secrets
-
 - name: Manage configmaps
   ansible.builtin.include_tasks:
     file: manage_kubemanifest.yml
@@ -24,6 +11,32 @@
     - all
     - never
     - configmaps
+
+- name: Manage pvcs
+  ansible.builtin.include_tasks:
+    file: manage_kubemanifest.yml
+    apply:
+      tags:
+        - pvcs
+  with_fileglob: "{{ manage_kubemanifests_template_dir }}/pvcs/*"
+  when: pvcs is defined and pvcs
+  tags:
+    - all
+    - never
+    - pvcs
+
+- name: Manage secrets
+  ansible.builtin.include_tasks:
+    file: manage_kubemanifest.yml
+    apply:
+      tags:
+        - secrets
+  with_fileglob: "{{ manage_kubemanifests_template_dir }}/secrets/*"
+  when: secrets is defined and secrets
+  tags:
+    - all
+    - never
+    - secrets
 
 - name: Manage automationcontroller
   ansible.builtin.include_tasks:

@@ -51,6 +51,15 @@
         path: "{{ generate_kubemanifests_template_dir }}/secrets"
         state: directory
 
+- name: Handle the pvcs directory creation
+  when: pvcs is defined and pvcs
+  block:
+    - name: Create the generated pvcs directory
+      ansible.builtin.file:
+        mode: '0775'
+        path: "{{ generate_kubemanifests_template_dir }}/pvcs"
+        state: directory
+
 - name: Template ansibleautomationplatform.yml
   ansible.builtin.copy:
     content: >
@@ -115,6 +124,20 @@
     mode: '0644'
   loop: "{{ configmaps }}"
   when: configmaps is defined and configmaps
+
+- name: Template pvcs
+  ansible.builtin.copy:
+    content: >
+      {{
+        lookup('ansible.builtin.template', 'templates/pvc.yml.j2') |
+        from_yaml |
+        combine(item | ansible.utils.remove_keys(target=['name']), recursive=true) |
+        to_nice_yaml(indent=2, sort_keys=false)
+      }}
+    dest: "{{ generate_kubemanifests_template_dir }}/pvcs/{{ item.name }}.yml"
+    mode: '0644'
+  loop: "{{ pvcs }}"
+  when: pvcs is defined and pvcs
 
 - name: Template secrets
   ansible.builtin.copy:

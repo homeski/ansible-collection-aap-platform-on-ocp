@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: myaap-controller-projects
+  namespace: aap-25
+spec:
+  accessModes:
+  - ReadWriteMany
+  storageClass: lvms-vg1
+  volumeMode: FileSystem
+  resources:
+    requests:
+      storage: 2000m

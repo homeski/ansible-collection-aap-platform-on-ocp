@@ -42,6 +42,13 @@ eda:
     database:
       database_secret: "{{ name_eda }}-postgres-configuration"
 
+pvcs:
+  - name: "{{ name_controller }}-projects"
+    spec:
+      resources:
+        requests:
+          storage: 2000m
+
 secrets:
   - name: "{{ name_gateway }}-postgres-configuration"
     data:

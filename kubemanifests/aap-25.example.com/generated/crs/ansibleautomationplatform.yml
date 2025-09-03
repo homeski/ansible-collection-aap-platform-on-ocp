@@ -6,16 +6,101 @@ metadata:
 spec:
   admin_password_secret: myaap-controller-admin-password
   controller:
+    admin_user: admin
+    auto_upgrade: true
+    create_preload_data: false
     disabled: false
+    garbage_collect_secrets: true
+    image_pull_policy: IfNotPresent
+    ingress_type: Route
+    ipv6_disabled: false
+    loadbalancer_ip: ''
+    loadbalancer_port: 80
+    loadbalancer_protocol: http
+    metrics_utility_cronjob_gather_schedule: '@hourly'
+    metrics_utility_cronjob_report_schedule: '@monthly'
+    metrics_utility_enabled: false
+    metrics_utility_pvc_claim_size: 5Gi
     name: myaap-controller
+    no_log: true
+    postgres_keepalives: true
+    postgres_keepalives_count: 5
+    postgres_keepalives_idle: 5
+    postgres_keepalives_interval: 5
+    postgres_storage_class: lvms-vg1
+    projects_persistence: false
+    projects_storage_access_mode: ReadWriteMany
+    projects_storage_size: 8Gi
+    replicas: 1
+    route_tls_termination_mechanism: Edge
+    set_self_labels: true
+    task_privileged: false
   database:
     database_secret: myaap-gateway-postgres-configuration
   db_fields_encryption_secret: myaap-controller-secret-key
   eda:
+    activation_worker:
+      replicas: 2
+    admin_user: admin
+    api:
+      gunicorn_workers: 2
+      replicas: 1
+    default_worker:
+      replicas: 2
     disabled: false
+    event_stream:
+      gunicorn_workers: 2
+      replicas: 1
+    image_pull_policy: IfNotPresent
+    ingress_type: Route
     name: myaap-eda
+    no_log: true
+    redis:
+      replicas: 1
+    scheduler:
+      replicas: 2
+    ui:
+      replicas: 1
+    worker:
+      replicas: 2
   hub:
+    api:
+      log_level: INFO
+      replicas: 1
+    content:
+      log_level: INFO
+      replicas: 2
     disabled: false
+    file_storage_access_mode: ReadWriteOnce
+    file_storage_size: 5Gi
+    file_storage_storage_class: lvms-vg1
+    force_drop_db: false
+    gunicorn_api_workers: 2
+    gunicorn_content_workers: 2
+    gunicorn_timeout: 90
+    haproxy_timeout: 180s
+    image_pull_policy: IfNotPresent
+    ingress_type: Route
+    loadbalancer_port: 80
+    loadbalancer_protocol: http
     name: myaap-hub
+    nginx_client_max_body_size: 10m
+    nginx_proxy_connect_timeout: 120s
+    nginx_proxy_read_timeout: 120s
+    nginx_proxy_send_timeout: 120s
+    no_log: true
+    postgres_storage_class: lvms-vg1
+    redis:
+      log_level: INFO
+      replicas: 1
+    redis_storage_class: lvms-vg1
+    resource_manager:
+      replicas: 1
+    route_tls_termination_mechanism: Edge
+    storage_type: File
+    web:
+      replicas: 1
+    worker:
+      replicas: 2
   no_log: true
   route_host: aap-25.example.com
