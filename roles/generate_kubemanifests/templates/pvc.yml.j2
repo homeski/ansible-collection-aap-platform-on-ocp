@@ -6,9 +6,9 @@ metadata:
   namespace: {{ ocp_namespace }}
 spec:
   accessModes:
-    - ReadWriteMany
-  storageClass: lvms-vg1
-  volumeMode: FileSystem
+    - ReadWriteOnce
+  storageClassName: lvms-vg1
+  volumeMode: Filesystem
   resources:
     requests:
       storage: 1Gi
