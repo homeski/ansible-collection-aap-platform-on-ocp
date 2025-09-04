@@ -1,0 +1,127 @@
+---
+######
+# General
+######
+
+ocp_namespace: aap-canonical
+name_gateway: canonical-gateway
+name_controller: canonical-controller
+name_eda: canonical-eda
+name_hub: canonical-hub
+manage_kubemanifests_validate_certs: false
+
+######
+# CRs
+######
+
+ansibleautomationplatform:
+  spec:
+    admin_password_secret: "{{ name_gateway }}-admin-password"
+    database:
+      database_secret: "{{ name_gateway }}-postgres-configuration"
+    db_fields_encryption_secret: "{{ name_gateway }}-encryption-secret"
+    route_host: canonical.escwq.xyz
+    controller:
+      disabled: false
+      name: "{{ name_controller }}"
+      postgres_configuration_secret: "{{ name_controller }}-postgres-configuration"
+      projects_existing_claim: "{{ name_controller }}-pvc-projects"
+      secret_key_secret: "{{ name_controller }}-secret-key"
+      task_resource_requirements:
+        requests:
+          cpu: 100m
+          memory: 128Mi
+          ephemeral-storage: 100M
+        limits:
+          cpu: 2000m
+          memory: 4Gi
+          ephemeral-storage: 500M
+    hub:
+      disabled: false
+      name: "{{ name_hub }}"
+      db_fields_encryption_secret: "{{ name_hub }}-encryption-secret"
+      postgres_configuration_secret: "{{ name_hub }}-postgres-configuration"
+    eda:
+      disabled: false
+      name: "{{ name_eda }}"
+      database:
+        database_secret: "{{ name_eda }}-postgres-configuration"
+      db_fields_encryption_secret: "{{ name_eda }}-encryption-secret"
+      ingress_type: Route
+      service_type: ClusterIP
+
+######
+# PVCs
+######
+
+pvcs:
+  - name: "{{ name_controller }}-pvc-projects"
+    spec:
+      resources:
+        requests:
+          storage: 5Gi
+
+######
+# Secrets
+######
+
+secrets:
+  - name: "{{ name_gateway }}-admin-password"
+    data:
+      password: foobar
+
+  - name: "{{ name_controller }}-secret-key"
+    data:
+      secret_key: myencryptionkey
+
+  - name: "{{ name_gateway }}-encryption-secret"
+    data:
+      secret_key: myencryptionkey
+
+  - name: "{{ name_eda }}-encryption-secret"
+    data:
+      secret_key: myencryptionkey
+
+  - name: "{{ name_hub }}-encryption-secret"
+    data:
+      database_fields.symmetric.key: "PL-MoD-KFjYE3ZmYrOmuq1rcxDqJg3w8MrYXaHQ7jQg="
+
+  - name: "{{ name_controller }}-postgres-configuration"
+    data:
+      host: 127.0.0.1
+      port: 5415
+      database: controller
+      username: postgres
+      password: example
+      sslmode: prefer
+      type: unmanaged
+
+  - name: "{{ name_gateway }}-postgres-configuration"
+    data:
+      host: 127.0.0.1
+      port: 5415
+      database: gateway
+      username: postgres
+      password: example
+      sslmode: prefer
+      type: unmanaged
+
+  - name: "{{ name_hub }}-postgres-configuration"
+    data:
+      host: 127.0.0.1
+      port: 5415
+      database: hub
+      username: postgres
+      password: example
+      sslmode: prefer
+      type: unmanaged
+
+  - name: "{{ name_eda }}-postgres-configuration"
+    data:
+      host: 127.0.0.1
+      port: 5415
+      database: eda
+      username: postgres
+      password: example
+      sslmode: prefer
+      type: unmanaged
