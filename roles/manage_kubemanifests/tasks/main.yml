@@ -1,4 +1,16 @@
 ---
+- name: Manage subscriptions
+  ansible.builtin.include_tasks:
+    file: manage_kubemanifest.yml
+    apply:
+      tags:
+        - subscriptions
+  with_fileglob: "{{ manage_kubemanifests_template_dir }}/subscriptions/*"
+  when: subscriptions is defined and subscriptions
+  tags:
+    - never
+    - subscriptions
+
 - name: Manage configmaps
   ansible.builtin.include_tasks:
     file: manage_kubemanifest.yml
