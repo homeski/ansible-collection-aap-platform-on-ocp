@@ -1,15 +1,31 @@
 ---
+- name: Manage operatorgroups
+  ansible.builtin.include_tasks:
+    file: manage_kubemanifest.yml
+    apply:
+      tags:
+        - operatorgroups
+        - operator
+  with_fileglob: "{{ manage_kubemanifests_template_dir }}/operatorgroups/*"
+  when: operatorgroups is defined and operatorgroups
+  tags:
+    - never
+    - operatorgroups
+    - operator
+
 - name: Manage subscriptions
   ansible.builtin.include_tasks:
     file: manage_kubemanifest.yml
     apply:
       tags:
         - subscriptions
+        - operator
   with_fileglob: "{{ manage_kubemanifests_template_dir }}/subscriptions/*"
   when: subscriptions is defined and subscriptions
   tags:
     - never
     - subscriptions
+    - operator
 
 - name: Manage configmaps
   ansible.builtin.include_tasks:
