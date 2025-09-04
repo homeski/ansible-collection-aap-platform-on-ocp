@@ -51,6 +51,15 @@
         path: "{{ generate_kubemanifests_template_dir }}/secrets"
         state: directory
 
+- name: Handle the subscriptions directory creation
+  when: subscriptions is defined and subscriptions
+  block:
+    - name: Create the generated subscriptions directory
+      ansible.builtin.file:
+        mode: '0775'
+        path: "{{ generate_kubemanifests_template_dir }}/subscriptions"
+        state: directory
+
 - name: Handle the pvcs directory creation
   when: pvcs is defined and pvcs
   block:
@@ -151,3 +160,17 @@
     mode: '0644'
   loop: "{{ secrets }}"
   when: secrets is defined and secrets
+
+- name: Template subscriptions
+  ansible.builtin.copy:
+    content: >
+      {{
+        lookup('ansible.builtin.template', 'templates/subscription.yml.j2') |
+        from_yaml |
+        combine(item | ansible.utils.remove_keys(target=['name', 'namespace']), recursive=true) |
+        to_nice_yaml(indent=2, sort_keys=false)
+      }}
+    dest: "{{ generate_kubemanifests_template_dir }}/subscriptions/{{ item.name }}.yml"
+    mode: '0644'
+  loop: "{{ subscriptions }}"
+  when: subscriptions is defined and subscriptions
