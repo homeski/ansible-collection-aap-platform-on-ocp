@@ -47,10 +47,10 @@ The collection follows the standard workflow:
 3. Use `manage_kubemanifests` role to apply/manage those resources on OpenShift
 
 ### Environment Structure
-Each host (e.g., `aap-24-dev.example.com`) has:
+Each host (e.g., `canonical.example.com`) has:
 - Host variables in `inventory/host_vars/`
 - Generated manifests in `kubemanifests/{hostname}/generated/`
-- Generated manifests are organized into `crs/`, `secrets/`, and `configmaps/` subdirectories
+- Generated manifests are organized into `operatorgroups`, `subscriptions`, `crs`, `secrets`, `configmaps`, and `pvcs` subdirectories
 
 ## Licensing
 
