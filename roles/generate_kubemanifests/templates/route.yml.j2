@@ -1,0 +1,12 @@
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: ""
+  namespace: {{ ocp_namespace }}
+spec:
+  host: ""
+  port:
+    targetPort: http
+  to: {}
+  wildcardPolicy: None

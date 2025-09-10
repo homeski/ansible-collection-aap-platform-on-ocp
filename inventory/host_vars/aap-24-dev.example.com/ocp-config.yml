@@ -16,16 +16,19 @@ automationhub:
     route_host: hub-dev.example.com
 
 secrets:
-  - name: "{{ name_controller }}-admin-password"
+  - metadata:
+      name: "{{ name_controller }}-admin-password"
     data:
       password: foobar
 
-  - name: "{{ name_hub }}-admin-password"
+  - metadata:
+      name: "{{ name_hub }}-admin-password"
     data:
       password: foobar2
 
 configmaps:
-  - name: "{{ name_controller }}-rsyslog-configmap"
+  - metadata:
+      name: "{{ name_controller }}-rsyslog-configmap"
     data:
       rsyslog.conf: |
         $MaxMessageSize 1000000

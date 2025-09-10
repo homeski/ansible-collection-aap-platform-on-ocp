@@ -55,7 +55,8 @@ ansibleautomationplatform:
 ######
 
 pvcs:
-  - name: "{{ name_controller }}-pvc-projects"
+  - metadata:
+      name: "{{ name_controller }}-pvc-projects"
     spec:
       resources:
         requests:
@@ -66,27 +67,33 @@ pvcs:
 ######
 
 secrets:
-  - name: "{{ name_gateway }}-admin-password"
+  - metadata:
+      name: "{{ name_gateway }}-admin-password"
     data:
       password: foobar
 
-  - name: "{{ name_controller }}-secret-key"
+  - metadata:
+      name: "{{ name_controller }}-secret-key"
     data:
       secret_key: myencryptionkey
 
-  - name: "{{ name_gateway }}-encryption-secret"
+  - metadata:
+      name: "{{ name_gateway }}-encryption-secret"
     data:
       secret_key: myencryptionkey
 
-  - name: "{{ name_eda }}-encryption-secret"
+  - metadata:
+      name: "{{ name_eda }}-encryption-secret"
     data:
       secret_key: myencryptionkey
 
-  - name: "{{ name_hub }}-encryption-secret"
+  - metadata:
+      name: "{{ name_hub }}-encryption-secret"
     data:
       database_fields.symmetric.key: "PL-MoD-KFjYE3ZmYrOmuq1rcxDqJg3w8MrYXaHQ7jQg="
 
-  - name: "{{ name_controller }}-postgres-configuration"
+  - metadata:
+      name: "{{ name_controller }}-postgres-configuration"
     data:
       host: 127.0.0.1
       port: 5415
@@ -96,7 +103,8 @@ secrets:
       sslmode: prefer
       type: unmanaged
 
-  - name: "{{ name_gateway }}-postgres-configuration"
+  - metadata:
+      name: "{{ name_gateway }}-postgres-configuration"
     data:
       host: 127.0.0.1
       port: 5415
@@ -106,7 +114,8 @@ secrets:
       sslmode: prefer
       type: unmanaged
 
-  - name: "{{ name_hub }}-postgres-configuration"
+  - metadata:
+      name: "{{ name_hub }}-postgres-configuration"
     data:
       host: 127.0.0.1
       port: 5415
@@ -116,7 +125,8 @@ secrets:
       sslmode: prefer
       type: unmanaged
 
-  - name: "{{ name_eda }}-postgres-configuration"
+  - metadata:
+      name: "{{ name_eda }}-postgres-configuration"
     data:
       host: 127.0.0.1
       port: 5415

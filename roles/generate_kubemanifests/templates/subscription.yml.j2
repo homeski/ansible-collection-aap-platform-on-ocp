@@ -1,12 +1,10 @@
 ---
 apiVersion: operators.coreos.com/v1alpha1
 kind: Subscription
-metadata:
-  name: "{{ item.name }}"
-  namespace: "{{ item.namespace }}"
+metadata: {}
 spec:
   channel: stable-2.5-cluster-scoped
   installPlanApproval: Manual
-  name: "{{ item.name }}"
+  name: "{{ item.metadata.name }}"
   source: redhat-operators
   sourceNamespace: openshift-marketplace

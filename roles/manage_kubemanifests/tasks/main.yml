@@ -53,6 +53,19 @@
     - never
     - pvcs
 
+- name: Manage routes
+  ansible.builtin.include_tasks:
+    file: manage_kubemanifest.yml
+    apply:
+      tags:
+        - routes
+  with_fileglob: "{{ manage_kubemanifests_template_dir }}/routes/*"
+  when: routes is defined and routes
+  tags:
+    - all
+    - never
+    - routes
+
 - name: Manage secrets
   ansible.builtin.include_tasks:
     file: manage_kubemanifest.yml
