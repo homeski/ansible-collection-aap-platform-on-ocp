@@ -191,6 +191,7 @@
     dest: "{{ generate_kubemanifests_template_dir }}/secrets/{{ item.metadata.name }}.yml"
     mode: '0644'
   loop: "{{ secrets }}"
+  no_log: true
   when: secrets is defined and secrets
 
 - name: Template subscriptions
