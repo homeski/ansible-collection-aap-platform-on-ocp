@@ -1,3 +1,13 @@
 ---
 generate_kubemanifests_template_dir: "{{ (playbook_dir, '..', 'kubemanifests', inventory_hostname, 'generated') | path_join }}"
 generate_kubemanifests_template_empty: false
+generate_kubemanifests_template_file_ansibleautomationplatform: templates/ansibleautomationplatform.yml.j2
+generate_kubemanifests_template_file_automationcontroller: templates/automationcontroller.yml.j2
+generate_kubemanifests_template_file_automationhub: templates/automationhub.yml.j2
+generate_kubemanifests_template_file_configmap: templates/configmap.yml.j2
+generate_kubemanifests_template_file_eda: templates/eda.yml.j2
+generate_kubemanifests_template_file_operatorgroup: templates/operatorgroup.yml.j2
+generate_kubemanifests_template_file_pvc: templates/pvc.yml.j2
+generate_kubemanifests_template_file_route: templates/route.yml.j2
+generate_kubemanifests_template_file_secret: templates/secret.yml.j2
+generate_kubemanifests_template_file_subscription: templates/subscription.yml.j2

@@ -91,7 +91,7 @@
   ansible.builtin.copy:
     content: >
       {{
-        lookup('ansible.builtin.template', 'templates/ansibleautomationplatform.yml.j2') |
+        lookup('ansible.builtin.template', generate_kubemanifests_template_file_ansibleautomationplatform) |
         from_yaml |
         combine(ansibleautomationplatform, recursive=true) |
         to_nice_yaml(2)
@@ -104,7 +104,7 @@
   ansible.builtin.copy:
     content: >
       {{
-        lookup('ansible.builtin.template', 'templates/automationcontroller.yml.j2') |
+        lookup('ansible.builtin.template', generate_kubemanifests_template_file_automationcontroller) |
         from_yaml |
         combine(automationcontroller, recursive=true) |
         to_nice_yaml(2)
@@ -117,7 +117,7 @@
   ansible.builtin.copy:
     content: >
       {{
-        lookup('ansible.builtin.template', 'templates/automationhub.yml.j2') |
+        lookup('ansible.builtin.template', generate_kubemanifests_template_file_automationhub) |
         from_yaml |
         combine(automationhub, recursive=true) |
         to_nice_yaml(2)
@@ -130,7 +130,7 @@
   ansible.builtin.copy:
     content: >
       {{
-        lookup('ansible.builtin.template', 'templates/eda.yml.j2') |
+        lookup('ansible.builtin.template', generate_kubemanifests_template_file_eda) |
         from_yaml |
         combine(eda, recursive=true) |
         to_nice_yaml(2)
@@ -143,7 +143,7 @@
   ansible.builtin.copy:
     content: >
       {{
-        lookup('ansible.builtin.template', 'templates/configmap.yml.j2') |
+        lookup('ansible.builtin.template', generate_kubemanifests_template_file_configmap) |
         from_yaml |
         to_nice_yaml(indent=2, sort_keys=false)
       }}
@@ -156,7 +156,7 @@
   ansible.builtin.copy:
     content: >
       {{
-        lookup('ansible.builtin.template', 'templates/pvc.yml.j2') |
+        lookup('ansible.builtin.template', generate_kubemanifests_template_file_pvc) |
         from_yaml |
         combine(item, recursive=true) |
         to_nice_yaml(indent=2, sort_keys=false)
@@ -170,7 +170,7 @@
   ansible.builtin.copy:
     content: >
       {{
-        lookup('ansible.builtin.template', 'templates/route.yml.j2') |
+        lookup('ansible.builtin.template', generate_kubemanifests_template_file_route) |
         from_yaml |
         combine(item, recursive=true) |
         to_nice_yaml(indent=2, sort_keys=false)
@@ -184,7 +184,7 @@
   ansible.builtin.copy:
     content: >
       {{
-        lookup('ansible.builtin.template', 'templates/secret.yml.j2') |
+        lookup('ansible.builtin.template', generate_kubemanifests_template_file_secret) |
         from_yaml |
         to_nice_yaml(indent=2, sort_keys=false)
       }}
@@ -198,7 +198,7 @@
   ansible.builtin.copy:
     content: >
       {{
-        lookup('ansible.builtin.template', 'templates/subscription.yml.j2') |
+        lookup('ansible.builtin.template', generate_kubemanifests_template_file_subscription) |
         from_yaml |
         combine(item, recursive=true) |
         to_nice_yaml(indent=2, sort_keys=false)
@@ -212,7 +212,7 @@
   ansible.builtin.copy:
     content: >
       {{
-        lookup('ansible.builtin.template', 'templates/operatorgroup.yml.j2') |
+        lookup('ansible.builtin.template', generate_kubemanifests_template_file_operatorgroup) |
         from_yaml |
         combine(item, recursive=true) |
         to_nice_yaml(indent=2, sort_keys=false)
