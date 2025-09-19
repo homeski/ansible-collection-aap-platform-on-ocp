@@ -1,1 +1,4 @@
 roles/manage_kubemanifests/tasks/manage_kubemanifest.yml name[template]
+roles/manage_kubemanifests/tasks/manage_kubemanifest.yml yaml[line-length]
+kubemanifests/aap-25.example.com/generated/pvcs/myaap-controller-projects.yml yaml[indentation]
+kubemanifests/canonical.example.com/generated/pvcs/canonical-controller-pvc-projects.yml yaml[indentation]
