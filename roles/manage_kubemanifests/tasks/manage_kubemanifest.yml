@@ -1,50 +1,50 @@
 ---
 - name: Set fact
   ansible.builtin.set_fact:
-    kubemanifest: "{{ lookup('ansible.builtin.file', item) | from_yaml }}"
+    manage_kubemanifests_object: "{{ lookup('ansible.builtin.file', item) | from_yaml }}"
 
-- name: "Get {{ kubemanifest.kind | lower }}/{{ kubemanifest.metadata.name }} -n {{ kubemanifest.metadata.namespace }}"
+- name: "Get {{ manage_kubemanifests_object.kind | lower }}/{{ manage_kubemanifests_object.metadata.name }} -n {{ manage_kubemanifests_object.metadata.namespace }}"
   kubernetes.core.k8s_info:
-    api_version: "{{ kubemanifest.apiVersion }}"
-    kind: "{{ kubemanifest.kind }}"
-    name: "{{ kubemanifest.metadata.name }}"
-    namespace: "{{ kubemanifest.metadata.namespace }}"
+    api_version: "{{ manage_kubemanifests_object.apiVersion }}"
+    kind: "{{ manage_kubemanifests_object.kind }}"
+    name: "{{ manage_kubemanifests_object.metadata.name }}"
+    namespace: "{{ manage_kubemanifests_object.metadata.namespace }}"
 
-- name: "Manage {{ kubemanifest.kind | lower }}/{{ kubemanifest.metadata.name }} -n {{ kubemanifest.metadata.namespace }}"
+- name: "Manage {{ manage_kubemanifests_object.kind | lower }}/{{ manage_kubemanifests_object.metadata.name }} -n {{ manage_kubemanifests_object.metadata.namespace }}"
   kubernetes.core.k8s:
     state: "{{ manage_kubemanifests_state }}"
     src: "{{ item }}"
     wait: true
 
-- name: "Wait until {{ kubemanifest.kind | lower }}/{{ kubemanifest.metadata.name }} -n {{ kubemanifest.metadata.namespace }} is ready"
+- name: "Wait until {{ manage_kubemanifests_object.kind | lower }}/{{ manage_kubemanifests_object.metadata.name }} -n {{ manage_kubemanifests_object.metadata.namespace }} is ready"
   kubernetes.core.k8s_info:
-    api_version: "{{ kubemanifest.apiVersion }}"
-    kind: "{{ kubemanifest.kind }}"
-    name: "{{ kubemanifest.metadata.name }}"
-    namespace: "{{ kubemanifest.metadata.namespace }}"
-  register: _result
+    api_version: "{{ manage_kubemanifests_object.apiVersion }}"
+    kind: "{{ manage_kubemanifests_object.kind }}"
+    name: "{{ manage_kubemanifests_object.metadata.name }}"
+    namespace: "{{ manage_kubemanifests_object.metadata.namespace }}"
+  register: manage_kubemanifests_result
   # The first  or block captures completed conditions for ansibleautomationplatform, automationcontroller
   # The second or block captures completed conditions for automationhub
   until: >
     (
-      _result.resources.0.status is defined and
+      manage_kubemanifests_result.resources.0.status is defined and
       (
-        _result.resources.0.status.conditions |
+        manage_kubemanifests_result.resources.0.status.conditions |
         selectattr('type', 'equalto', 'Running') |
         selectattr('status', 'equalto', 'True') |
         first
       ) is defined and
       (
-        _result.resources.0.status.conditions |
+        manage_kubemanifests_result.resources.0.status.conditions |
         selectattr('type', 'equalto', 'Successful') |
         selectattr('status', 'equalto', 'True') |
         first
       ) is defined
     ) or
     (
-      _result.resources.0.status is defined and
+      manage_kubemanifests_result.resources.0.status is defined and
       (
-        _result.resources.0.status.conditions |
+        manage_kubemanifests_result.resources.0.status.conditions |
         selectattr('type', 'equalto', 'Automationhub-Operator-Finished-Execution') |
         selectattr('status', 'equalto', 'True') |
         first
@@ -54,9 +54,9 @@
   delay: 15
   when: >
     (
-      kubemanifest.kind | lower == 'ansibleautomationplatform' or
-      kubemanifest.kind | lower == 'automationcontroller' or
-      kubemanifest.kind | lower == 'automationhub' or
-      kubemanifest.kind | lower == 'eda'
+      manage_kubemanifests_object.kind | lower == 'ansibleautomationplatform' or
+      manage_kubemanifests_object.kind | lower == 'automationcontroller' or
+      manage_kubemanifests_object.kind | lower == 'automationhub' or
+      manage_kubemanifests_object.kind | lower == 'eda'
     ) and
     state == 'present'
