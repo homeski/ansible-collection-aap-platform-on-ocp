@@ -59,4 +59,4 @@
       manage_kubemanifests_object.kind | lower == 'automationhub' or
       manage_kubemanifests_object.kind | lower == 'eda'
     ) and
-    state == 'present'
+    manage_kubemanifests_state == 'present'
