@@ -1,5 +1,6 @@
 ---
-generate_kubemanifests_template_dir: "{{ (playbook_dir, '..', 'kubemanifests', inventory_hostname, 'generated') | path_join }}"
+generate_kubemanifests_template_host_dir: "{{ (playbook_dir, '..', 'kubemanifests', inventory_hostname, 'generated') | path_join }}"
+generate_kubemanifests_template_group_dir: "{{ (playbook_dir, '..', 'kubemanifests', group_names[0], 'generated') | path_join }}"
 generate_kubemanifests_template_empty: false
 generate_kubemanifests_template_file_ansibleautomationplatform: templates/ansibleautomationplatform.yml.j2
 generate_kubemanifests_template_file_automationcontroller: templates/automationcontroller.yml.j2

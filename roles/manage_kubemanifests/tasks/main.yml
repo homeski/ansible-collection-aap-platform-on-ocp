@@ -6,7 +6,7 @@
       tags:
         - operatorgroups
         - operator
-  with_fileglob: "{{ manage_kubemanifests_template_dir }}/operatorgroups/*"
+  with_fileglob: "{{ manage_kubemanifests_template_group_dir }}/operatorgroups/*"
   when: operatorgroups is defined and operatorgroups
   tags:
     - never
@@ -20,7 +20,7 @@
       tags:
         - subscriptions
         - operator
-  with_fileglob: "{{ manage_kubemanifests_template_dir }}/subscriptions/*"
+  with_fileglob: "{{ manage_kubemanifests_template_group_dir }}/subscriptions/*"
   when: subscriptions is defined and subscriptions
   tags:
     - never
@@ -33,7 +33,7 @@
     apply:
       tags:
         - configmaps
-  with_fileglob: "{{ manage_kubemanifests_template_dir }}/configmaps/*"
+  with_fileglob: "{{ manage_kubemanifests_template_host_dir }}/configmaps/*"
   when: configmaps is defined and configmaps
   tags:
     - all
@@ -46,7 +46,7 @@
     apply:
       tags:
         - pvcs
-  with_fileglob: "{{ manage_kubemanifests_template_dir }}/pvcs/*"
+  with_fileglob: "{{ manage_kubemanifests_template_host_dir }}/pvcs/*"
   when: pvcs is defined and pvcs
   tags:
     - all
@@ -59,7 +59,7 @@
     apply:
       tags:
         - routes
-  with_fileglob: "{{ manage_kubemanifests_template_dir }}/routes/*"
+  with_fileglob: "{{ manage_kubemanifests_template_host_dir }}/routes/*"
   when: routes is defined and routes
   tags:
     - all
@@ -72,7 +72,7 @@
     apply:
       tags:
         - secrets
-  with_fileglob: "{{ manage_kubemanifests_template_dir }}/secrets/*"
+  with_fileglob: "{{ manage_kubemanifests_template_host_dir }}/secrets/*"
   when: secrets is defined and secrets
   tags:
     - all
@@ -85,7 +85,7 @@
     apply:
       tags:
         - automationcontroller
-  with_fileglob: "{{ manage_kubemanifests_template_dir }}/crs/automationcontroller.yml"
+  with_fileglob: "{{ manage_kubemanifests_template_host_dir }}/crs/automationcontroller.yml"
   when: automationcontroller is defined
   tags:
     - all
@@ -98,7 +98,7 @@
     apply:
       tags:
         - automationhub
-  with_fileglob: "{{ manage_kubemanifests_template_dir }}/crs/automationhub.yml"
+  with_fileglob: "{{ manage_kubemanifests_template_host_dir }}/crs/automationhub.yml"
   when: automationhub is defined
   tags:
     - all
@@ -111,7 +111,7 @@
     apply:
       tags:
         - eda
-  with_fileglob: "{{ manage_kubemanifests_template_dir }}/crs/eda.yml"
+  with_fileglob: "{{ manage_kubemanifests_template_host_dir }}/crs/eda.yml"
   when: eda is defined
   tags:
     - all
@@ -124,7 +124,7 @@
     apply:
       tags:
         - ansibleautomationplatform
-  with_fileglob: "{{ manage_kubemanifests_template_dir }}/crs/ansibleautomationplatform.yml"
+  with_fileglob: "{{ manage_kubemanifests_template_host_dir }}/crs/ansibleautomationplatform.yml"
   when: ansibleautomationplatform is defined
   tags:
     - all
