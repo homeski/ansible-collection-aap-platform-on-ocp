@@ -123,10 +123,12 @@
     file: manage_kubemanifest.yml
     apply:
       tags:
+        - aap
         - ansibleautomationplatform
   with_fileglob: "{{ manage_kubemanifests_template_host_dir }}/crs/ansibleautomationplatform.yml"
   when: ansibleautomationplatform is defined
   tags:
     - all
     - never
+    - aap
     - ansibleautomationplatform
