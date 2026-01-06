@@ -50,7 +50,7 @@
         first
       ) is defined
     )
-  retries: 60
+  retries: 70
   delay: 15
   when: >
     (
