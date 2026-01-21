@@ -12,6 +12,7 @@
 
 - name: "Manage {{ manage_kubemanifests_object.kind | lower }}/{{ manage_kubemanifests_object.metadata.name }} -n {{ manage_kubemanifests_object.metadata.namespace }}"
   kubernetes.core.k8s:
+    apply: true
     state: "{{ manage_kubemanifests_state }}"
     src: "{{ item }}"
     wait: true
