@@ -12,14 +12,11 @@
     secrets is defined or
     subscriptions is defined
   block:
-    - name: Empty the generated directories, if they exist
+    - name: Empty the kubemanifest parent directory, if it exists
       ansible.builtin.file:
-        path: "{{ item }}"
+        path: "{{ generate_kubemanifests_template_parent_dir }}"
         state: absent
       when: generate_kubemanifests_template_empty | bool
-      loop:
-        - "{{ generate_kubemanifests_template_host_dir }}"
-        - "{{ generate_kubemanifests_template_group_dir }}"
       failed_when: false
 
 - name: Handle the crs directory creation
