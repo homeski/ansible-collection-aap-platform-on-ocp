@@ -3,6 +3,7 @@
   ansible.builtin.file:
     path: "{{ generate_kubemanifests_template_parent_dir }}"
     state: absent
+  run_once: true
   when: generate_kubemanifests_template_empty | bool
   failed_when: false
 
