@@ -19,44 +19,9 @@
       when: generate_kubemanifests_template_empty | bool
       failed_when: false
 
-- name: Handle the crs directory creation
-  when: >
-    ansibleautomationplatform is defined or
-    automationcontroller is defined or
-    automationhub is defined or
-    eda is defined
-  block:
-    - name: Create the generated crs directory
-      ansible.builtin.file:
-        mode: '0775'
-        path: "{{ generate_kubemanifests_template_host_dir }}/crs"
-        state: directory
-
-- name: Handle the resource directory creation
-  block:
-    - name: "Create the generated {{ item }} directory"
-      ansible.builtin.file:
-        mode: '0775'
-        path: "{{ generate_kubemanifests_template_host_dir }}/{{ item }}"
-        state: directory
-      loop:
-        - configmaps
-        - pvcs
-        - routes
-        - secrets
-      when: item is defined and item
-
-- name: Handle the operator directories creation
-  block:
-    - name: "Create the generated {{ item }} directory"
-      ansible.builtin.file:
-        mode: '0775'
-        path: "{{ generate_kubemanifests_template_group_dir }}/{{ item }}"
-        state: directory
-      loop:
-        - operatorgroups
-        - subscriptions
-      when: item is defined and item
+- name: Create the kubemanifest directories
+  ansible.builtin.import_tasks:
+    file: create_kubemanifest_directories.yml
 
 - name: Template ansibleautomationplatform.yml
   ansible.builtin.copy:

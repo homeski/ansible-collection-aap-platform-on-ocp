@@ -1,0 +1,52 @@
+- name: Create the generated crs directory
+  ansible.builtin.file:
+    mode: '0775'
+    path: "{{ generate_kubemanifests_template_host_dir }}/crs"
+    state: directory
+  when: >
+    ansibleautomationplatform is defined or
+    automationcontroller is defined or
+    automationhub is defined or
+    eda is defined
+
+- name: Create the generated configmaps directory
+  ansible.builtin.file:
+    mode: '0775'
+    path: "{{ generate_kubemanifests_template_host_dir }}/configmaps"
+    state: directory
+  when: configmaps is defined and configmaps
+
+- name: Create the generated routes directory
+  ansible.builtin.file:
+    mode: '0775'
+    path: "{{ generate_kubemanifests_template_host_dir }}/routes"
+    state: directory
+  when: routes is defined and routes
+
+- name: Create the generated secrets directory
+  ansible.builtin.file:
+    mode: '0775'
+    path: "{{ generate_kubemanifests_template_host_dir }}/secrets"
+    state: directory
+  when: secrets is defined and secrets
+
+- name: Create the generated subscriptions directory
+  ansible.builtin.file:
+    mode: '0775'
+    path: "{{ generate_kubemanifests_template_group_dir }}/subscriptions"
+    state: directory
+  when: subscriptions is defined and subscriptions
+
+- name: Create the generated pvcs directory
+  ansible.builtin.file:
+    mode: '0775'
+    path: "{{ generate_kubemanifests_template_host_dir }}/pvcs"
+    state: directory
+  when: pvcs is defined and pvcs
+
+- name: Create the generated operatorgroups directory
+  ansible.builtin.file:
+    mode: '0775'
+    path: "{{ generate_kubemanifests_template_group_dir }}/operatorgroups"
+    state: directory
+  when: operatorgroups is defined and operatorgroups
