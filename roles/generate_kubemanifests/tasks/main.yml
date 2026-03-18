@@ -1,23 +1,10 @@
 ---
-- name: Handle the directory creation and/or cleanup
-  when: >
-    ansibleautomationplatform is defined or
-    automationcontroller is defined or
-    automationhub is defined or
-    configmaps is defined or
-    eda is defined or
-    operatorgroups is defined or
-    pvcs is defined or
-    routes is defined or
-    secrets is defined or
-    subscriptions is defined
-  block:
-    - name: Empty the kubemanifest parent directory, if it exists
-      ansible.builtin.file:
-        path: "{{ generate_kubemanifests_template_parent_dir }}"
-        state: absent
-      when: generate_kubemanifests_template_empty | bool
-      failed_when: false
+- name: Empty the kubemanifest parent directory, if it exists
+  ansible.builtin.file:
+    path: "{{ generate_kubemanifests_template_parent_dir }}"
+    state: absent
+  when: generate_kubemanifests_template_empty | bool
+  failed_when: false
 
 - name: Create the kubemanifest directories
   ansible.builtin.import_tasks:

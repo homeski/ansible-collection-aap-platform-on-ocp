@@ -1,3 +1,9 @@
+- name: Create the kubemanifests parent directory
+  ansible.builtin.file:
+    mode: '0775'
+    path: "{{ generate_kubemanifests_template_parent_dir }}"
+    state: directory
+
 - name: Create the generated crs directory
   ansible.builtin.file:
     mode: '0775'
