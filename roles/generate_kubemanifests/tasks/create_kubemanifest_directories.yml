@@ -1,3 +1,4 @@
+---
 - name: Create the kubemanifests parent directory
   ansible.builtin.file:
     mode: '0775'
