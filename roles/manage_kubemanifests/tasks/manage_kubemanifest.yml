@@ -14,7 +14,7 @@
   kubernetes.core.k8s:
     apply: true
     state: "{{ manage_kubemanifests_state }}"
-    src: "{{ item }}"
+    definition: "{{ lookup('ansible.builtin.template', item) | from_yaml }}"
     wait: true
 
 - name: "Wait until {{ manage_kubemanifests_object.kind | lower }}/{{ manage_kubemanifests_object.metadata.name }} -n {{ manage_kubemanifests_object.metadata.namespace }} is ready"
@@ -24,7 +24,7 @@
     name: "{{ manage_kubemanifests_object.metadata.name }}"
     namespace: "{{ manage_kubemanifests_object.metadata.namespace }}"
   register: manage_kubemanifests_result
-  # The first  or block captures completed conditions for ansibleautomationplatform, automationcontroller
+  # The first or block captures completed conditions for ansibleautomationplatform, automationcontroller
   # The second or block captures completed conditions for automationhub
   until: >
     (

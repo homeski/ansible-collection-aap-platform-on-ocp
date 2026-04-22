@@ -13,3 +13,4 @@ generate_kubemanifests_template_file_pvc: templates/pvc.yml.j2
 generate_kubemanifests_template_file_route: templates/route.yml.j2
 generate_kubemanifests_template_file_secret: templates/secret.yml.j2
 generate_kubemanifests_template_file_subscription: templates/subscription.yml.j2
+generate_kubemanifest_secret_split_match: "jinja_"
